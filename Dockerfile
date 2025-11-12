@@ -44,11 +44,11 @@ RUN dnf install -y epel-release && \
     dnf install -y supervisor dnsmasq mariadb mariadb-server perl-DBD-mysql initscripts gettext hostname && \
     dnf clean all
 
-RUN sed -i -e 's|#PermitRootLogin yes|PermitRootLogin yes|g' \
+RUN sed -i -e 's|#PermitRootLogin yes|PermitRootLogin no|g' \
            -e 's|#Port 22|Port 2200|g' \
            -e 's|#UseDNS yes|UseDNS no|g' /etc/ssh/sshd_config && \
     echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config && \
-    echo "root:Rudra@@123" | chpasswd && \
+    echo "root:admin@@123" | chpasswd && \
     rm -rf /root/.ssh && \
     mv /xcatdata /xcatdata.NEEDINIT
 
